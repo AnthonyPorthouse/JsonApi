@@ -9,7 +9,7 @@ class ResourceObjectTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->resourceObject = new ResourceObject("Test");
+        $this->resourceObject = new ResourceObject('Test');
     }
 
     public function testConstruction()
@@ -21,7 +21,7 @@ class ResourceObjectTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('Test', $result['type']);
 
-        $this->resourceObject = new ResourceObject("Test", 1);
+        $this->resourceObject = new ResourceObject('Test', 1);
         $result = $this->resourceObject->jsonSerialize();
 
         $this->assertArrayHasKey('id', $result);

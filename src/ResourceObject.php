@@ -4,7 +4,7 @@ namespace JsonApi;
 
 use Illuminate\Contracts\Support\Jsonable;
 
-abstract class ResourceObject implements Jsonable, \JsonSerializable
+class ResourceObject implements Jsonable, \JsonSerializable
 {
     protected $id;
     protected $type;
@@ -13,10 +13,13 @@ abstract class ResourceObject implements Jsonable, \JsonSerializable
     protected $links;
     protected $meta;
 
-    public function __construct($type, $id)
+    public function __construct($type, $id = null)
     {
         $this->type = (string) $type;
-        $this->id = (string) $id;
+
+        if (!is_null($id)) {
+            $this->id = (string) $id;
+        }
 
         $this->attributes = [];
         $this->relationships = [];
@@ -54,9 +57,12 @@ abstract class ResourceObject implements Jsonable, \JsonSerializable
     public function jsonSerialize()
     {
         $response = [
-            'id' => $this->id,
             'type' => $this->type,
         ];
+
+        if (!is_null($this->id)) {
+            $response['id'] = $this->id;
+        }
 
         if (count($this->attributes)) {
             $response['attributes'] = $this->attributes;

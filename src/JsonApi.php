@@ -51,7 +51,6 @@ class JsonApi implements Jsonable, JsonSerializable
      */
     public function toJson($options = 0)
     {
-
         return json_encode($this, $options);
     }
 
